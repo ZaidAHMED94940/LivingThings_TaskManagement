@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Helper function to handle API requests
-const apiUrl = "http://localhost:8000/api/tasks/";
+const apiUrl = process.env.REACT_APP_BACKEND_DJANGO_API;
 
 const TodoList = () => {
   const [tasks, setTasks] = useState([]);
@@ -14,6 +15,7 @@ const TodoList = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editTaskId, setEditTaskId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   // Function to get the auth token from localStorage
   const getAuthToken = () => {
@@ -21,7 +23,10 @@ const TodoList = () => {
     console.log("Auth Token:", token); // Check if the token is available
     return token;
   };
-  
+  const handleLogout = () => {
+    localStorage.removeItem("authtoken"); // Remove the auth token
+    navigate("/"); // Redirect to the home page
+  };
 
   // Function to set the auth headers
   const getAuthHeaders = () => {
@@ -201,63 +206,67 @@ const TodoList = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col justify-center items-center">
-      {/* Welcome Zaid outside the box */}
-      {/* <h1 className="text-4xl font-bold text-yellow-500 mb-8">Welcome Zaid</h1> */}
-
-      {/* Task Management Box */}
-      <div className="max-w-xl w-full p-8 bg-gray-900 rounded-xl shadow-xl mb-10">
-        {/* Task Management System title inside the box */}
-        <h2 className="text-4xl font-bold text-yellow-500 text-center mb-8">
-          Task Management System
-        </h2>
-
-        <button
-          onClick={openModal}
-          className="w-full py-4 mt-4 bg-yellow-500 text-black font-semibold rounded-lg shadow-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-        >
-          Add Task
-        </button>
-
-        {/* Task List */}
-        <div className="space-y-6 mt-8">
-          {tasks.length === 0 ? (
-            <p className="text-center text-yellow-300">No tasks available.</p>
-          ) : (
-            tasks.map((task) => (
-              <div
-                key={task.id}
-                className="flex justify-between items-center bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-200 ease-in-out"
-              >
-                <div className="text-left">
-                  <h3 className="text-xl font-semibold text-yellow-500">
-                    {task.title}
-                  </h3>
-                  <p className="text-sm text-yellow-300 mt-2">{task.description}</p>
-                  <p className="text-sm text-yellow-400 mt-2">
-                    Effort: {task.effort_days} days
-                  </p>
-                  <p className="text-sm text-yellow-400 mt-2">Due: {task.due_date}</p>
-                </div>
-
-                <div className="flex space-x-4">
-                  <button
-                    onClick={() => handleTaskEdit(task)}
-                    className="px-6 py-2 bg-yellow-500 text-black font-semibold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleTaskDelete(task.id)}
-                    className="px-6 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
-                  >
-                    Delete
-                  </button>
-                </div>
+    <div className="min-h-screen bg-black flex flex-col items-center">
+    {/* Logout Button */}
+    <button
+      onClick={handleLogout}
+      className="self-end mr-8 mt-6 py-2 px-4 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400"
+    >
+      Logout
+    </button>
+  
+    {/* Task Management Box */}
+    <div className="max-w-xl w-full p-8 bg-gray-900 rounded-xl shadow-xl mt-4">
+      <h2 className="text-4xl font-bold text-yellow-500 text-center mb-8">
+        Task Management System
+      </h2>
+  
+      <button
+        onClick={openModal}
+        className="w-full py-4 mt-4 bg-yellow-500 text-black font-semibold rounded-lg shadow-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      >
+        Add Task
+      </button>
+  
+      {/* Task List */}
+      <div className="space-y-6 mt-8">
+        {tasks.length === 0 ? (
+          <p className="text-center text-yellow-300">No tasks available.</p>
+        ) : (
+          tasks.map((task) => (
+            <div
+              key={task.id}
+              className="flex justify-between items-center bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl transition duration-200 ease-in-out"
+            >
+              <div className="text-left">
+                <h3 className="text-xl font-semibold text-yellow-500">
+                  {task.title}
+                </h3>
+                <p className="text-sm text-yellow-300 mt-2">{task.description}</p>
+                <p className="text-sm text-yellow-400 mt-2">
+                  Effort: {task.effort_days} days
+                </p>
+                <p className="text-sm text-yellow-400 mt-2">Due: {task.due_date}</p>
               </div>
-            ))
-          )}
-        </div>
+  
+              <div className="flex space-x-4">
+                <button
+                  onClick={() => handleTaskEdit(task)}
+                  className="px-6 py-2 bg-yellow-500 text-black font-semibold rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleTaskDelete(task.id)}
+                  className="px-6 py-2 bg-red-500 text-white font-semibold rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
 
         {/* Modal for adding/editing task */}
         {isModalOpen && (

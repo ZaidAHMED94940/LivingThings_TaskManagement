@@ -6,7 +6,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 function Login() {
   const navigate = useNavigate();
-
+  
   // Use one state for all form data
   const [formData, setFormData] = useState({
     username: '',

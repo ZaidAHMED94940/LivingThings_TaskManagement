@@ -11,6 +11,8 @@ TaskManagement/
 └── backend2/     # Django backend implementation
 ```
 
+### First Start django server and run migrations so that user table will be created and in nodejs registeration would be done
+
 ## Frontend Setup (React)
 
 ### Prerequisites
@@ -35,42 +37,36 @@ TaskManagement/
 
 The application will be available at `http://localhost:3000`
 
-## Backend 1 Setup (Node.js)
-
-### Prerequisites
-- Node.js (v14.0.0 or higher)
-- npm (v6.0.0 or higher)
-
-### Installation Steps
-1. Navigate to the backend1 directory:
-   ```bash
-   cd backend1
-   ```
-
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-3. Create a `.env` file in the backend1 directory with the following variables:
-   ```
-   PORT=5000
-   MONGODB_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret
-   ```
-
-4. Start the server:
-   ```bash
-   node index.js
-   ```
-
-The Node.js server will run on `http://localhost:5000`
-
 ## Backend 2 Setup (Django)
 
 ### Prerequisites
 - Python (v3.8 or higher)
 - pip (Python package manager)
+
+## Environment Variables
+
+NOTE JWT_SECRET should be same as SECRET_KEY in django for authentication of token
+### Backend 1 (Node.js)
+Create a `.env` file in the backend1 directory with:
+```
+PORT=5000
+JWT_SECRET=your_django_secret_key
+```
+
+### Backend 2 (Django)
+Create a `.env` file in the backend2 directory with:
+```
+DEBUG=True
+SECRET_KEY=your_django_secret_key
+```
+### Frontent (React.js)
+Create a `.env` file in the frontend directory with:
+```
+REACT_APP_BACKEND_DJANGO_API=http://localhost:8000/api/tasks/
+REACT_APP_BACKEND_NODEJS_API=http://localhost:5000/api/v1/user/
+```
+
+
 
 ### Installation Steps
 1. Navigate to the backend2 directory:
@@ -114,21 +110,35 @@ The Node.js server will run on `http://localhost:5000`
 
 The Django server will run on `http://localhost:8000`
 
-## Environment Variables
+## Backend 1 Setup (Node.js)
 
-### Backend 1 (Node.js)
-Create a `.env` file in the backend1 directory with:
-```
-PORT=5000
-MONGODB_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
-```
+### Prerequisites
+- Node.js (v14.0.0 or higher)
+- npm (v6.0.0 or higher)
 
-### Backend 2 (Django)
-Create a `.env` file in the backend2 directory with:
-```
-DEBUG=True
-SECRET_KEY=your_django_secret_key
-DATABASE_URL=your_database_url
-```
+### Installation Steps
+1. Navigate to the backend1 directory:
+   ```bash
+   cd backend1
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Create a `.env` file in the backend1 directory with the following variables:
+   ```
+   PORT=5000
+   MONGODB_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   ```
+
+4. Start the server:
+   ```bash
+   node index.js
+   ```
+
+The Node.js server will run on `http://localhost:5000`
+
 
