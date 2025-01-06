@@ -27,7 +27,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_NODEJS_API}/login`,
+        `${process.env.REACT_APP_BACKEND_NODEJS_API}login`,
         dataToSend, // Send data as JSON
         {
           headers: {
