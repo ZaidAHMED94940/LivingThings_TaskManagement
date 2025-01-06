@@ -6,7 +6,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 function Login() {
   const navigate = useNavigate();
-
+  
   // Use one state for all form data
   const [formData, setFormData] = useState({
     username: '',
@@ -27,7 +27,7 @@ function Login() {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/v1/user/login',
+        `${process.env.REACT_APP_BACKEND_NODEJS_API}/login`,
         dataToSend, // Send data as JSON
         {
           headers: {

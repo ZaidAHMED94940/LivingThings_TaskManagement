@@ -9,7 +9,6 @@ app.use(cors())
 app.use(express.json());
 dotenv.config();
 const port = process.env.PORT;
-console.log(process.env.JWT_SECRET,"JWT SECRET")
   
 app.use("/api/v1/user",UserRoutes)
 app.listen(port,()=>{
