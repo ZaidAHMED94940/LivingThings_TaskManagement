@@ -31,8 +31,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG') == 'True'
 
 # Debugging output
-print("SECRET_KEY:", SECRET_KEY)
-print("DEBUG:", DEBUG)
 
 ALLOWED_HOSTS = []
 

@@ -141,5 +141,38 @@ The Node.js server will run on `http://localhost:5000`
 
 
 
-The login page
-![Alt text](image.png)
+### The login page
+![Alt text](images/image.png)
+
+
+### The Register Page
+
+![Alt text](images/image1.png)
+
+## Task Management Page
+
+![Alt text](images/image2.png)
+
+## Add a Task 
+
+![Alt text](images/image3.png)
+
+## When Task is Saved
+
+![Alt text](images/image4.png)
+
+### Updating the Task
+
+![Alt text](images/image5.png)
+
+### Deleting the Task
+
+![Alt text](images/image7.png)
+
+### Export to Excel
+
+![Alt text](images/image6.png)
+
+### Excel Image
+
+![Alt text](images/image8.png)
