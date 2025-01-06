@@ -37,12 +37,6 @@ TaskManagement/
 
 The application will be available at `http://localhost:3000`
 
-## Backend 2 Setup (Django)
-
-### Prerequisites
-- Python (v3.8 or higher)
-- pip (Python package manager)
-
 ## Environment Variables
 
 NOTE JWT_SECRET should be same as SECRET_KEY in django for authentication of token
@@ -66,7 +60,11 @@ REACT_APP_BACKEND_DJANGO_API=http://localhost:8000/api/tasks/
 REACT_APP_BACKEND_NODEJS_API=http://localhost:5000/api/v1/user/
 ```
 
+## Backend 2 Setup (Django)
 
+### Prerequisites
+- Python (v3.8 or higher)
+- pip (Python package manager)
 
 ### Installation Steps
 1. Navigate to the backend2 directory:
@@ -142,3 +140,6 @@ The Django server will run on `http://localhost:8000`
 The Node.js server will run on `http://localhost:5000`
 
 
+
+The login page
+![Alt text](image.png)
