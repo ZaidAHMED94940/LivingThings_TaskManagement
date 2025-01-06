@@ -23,7 +23,7 @@ const Register = () => {
     console.log('Form submitted:', formData);
     axios({
       method: "POST",
-      url: `${process.env.REACT_APP_BACKEND_NODEJS_API}/register`,
+      url: `${process.env.REACT_APP_BACKEND_NODEJS_API}register`,
       data: formData
     })
       .then(res => {
